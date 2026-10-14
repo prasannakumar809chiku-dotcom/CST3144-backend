@@ -38,6 +38,14 @@ test('validateLessonUpdatePayload rejects unsupported and negative spaces', () =
   assert.ok(result.errors.some((error) => error.includes('spaces')));
 });
 
+
+test('validateLessonUpdatePayload validates teacher structure', () => {
+  const result = validateLessonUpdatePayload({ teacher: { speciality: 'Maths' } });
+
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.includes('teacher must be an object')));
+});
+
 test('parseObjectId returns null for invalid id', () => {
   assert.equal(parseObjectId('bad-id'), null);
 });

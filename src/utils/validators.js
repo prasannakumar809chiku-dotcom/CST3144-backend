@@ -79,6 +79,24 @@ function validateLessonUpdatePayload(payload) {
     }
   });
 
+
+  if ('teacher' in payload) {
+    if (!isPlainObject(payload.teacher) || typeof payload.teacher.name !== 'string' || !payload.teacher.name.trim()) {
+      errors.push('teacher must be an object with a non-empty name');
+    }
+  }
+
+  if ('teacherName' in payload && (!String(payload.teacherName).trim())) {
+    errors.push('teacherName must be a non-empty string');
+  }
+
+  if ('subject' in payload && (!String(payload.subject).trim())) {
+    errors.push('subject must be a non-empty string');
+  }
+
+  if ('location' in payload && (!String(payload.location).trim())) {
+    errors.push('location must be a non-empty string');
+  }
   if ('price' in payload && (Number.isNaN(Number(payload.price)) || Number(payload.price) < 0)) {
     errors.push('price must be a non-negative number');
   }
@@ -93,7 +111,10 @@ function validateLessonUpdatePayload(payload) {
     data: {
       ...payload,
       ...(payload.price !== undefined ? { price: Number(payload.price) } : {}),
-      ...(payload.spaces !== undefined ? { spaces: Number(payload.spaces) } : {})
+      ...(payload.spaces !== undefined ? { spaces: Number(payload.spaces) } : {}),
+      ...(payload.teacherName !== undefined ? { teacherName: String(payload.teacherName).trim() } : {}),
+      ...(payload.subject !== undefined ? { subject: String(payload.subject).trim() } : {}),
+      ...(payload.location !== undefined ? { location: String(payload.location).trim() } : {})
     }
   };
 }
