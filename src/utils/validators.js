@@ -39,6 +39,10 @@ function validateOrderPayload(payload) {
     errors.push('items must contain at least one lesson');
   }
 
+  if (items.length > 20) {
+    errors.push('items cannot contain more than 20 entries');
+  }
+
   const normalizedItems = items.map((item) => ({
     lessonId: item.lessonId,
     quantity: Number(item.quantity)
@@ -51,6 +55,10 @@ function validateOrderPayload(payload) {
 
     if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
       errors.push(`items[${index}].quantity must be a positive integer`);
+    }
+
+    if (Number.isInteger(item.quantity) && item.quantity > 10) {
+      errors.push(`items[${index}].quantity must not exceed 10`);
     }
   });
 

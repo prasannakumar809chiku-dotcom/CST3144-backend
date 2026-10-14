@@ -30,6 +30,18 @@ test('validateOrderPayload rejects invalid name/phone/quantity', () => {
   assert.ok(result.errors.some((error) => error.includes('quantity')));
 });
 
+
+test('validateOrderPayload rejects excessive quantities', () => {
+  const result = validateOrderPayload({
+    name: 'Alice Smith',
+    phone: '07123456789',
+    items: [{ lessonId: '66aa00000000000000000001', quantity: 11 }]
+  });
+
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.includes('must not exceed 10')));
+});
+
 test('validateLessonUpdatePayload rejects unsupported and negative spaces', () => {
   const result = validateLessonUpdatePayload({ spaces: -1, random: true });
 
