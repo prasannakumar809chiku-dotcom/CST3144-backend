@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#eefcf7"/>
+  <circle cx="100" cy="100" r="42" fill="#7dd3fc"/>
+  <circle cx="160" cy="100" r="42" fill="#34d399"/>
+  <circle cx="220" cy="100" r="42" fill="#86efac"/>
+  <text x="160" y="180" text-anchor="middle" font-family="Arial" font-size="18" fill="#065f46">Science Lab</text>
+</svg>

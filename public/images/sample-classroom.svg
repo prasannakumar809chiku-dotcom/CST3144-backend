@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#f2f6ff"/>
+  <rect x="40" y="40" width="240" height="120" rx="12" fill="#cfe1ff"/>
+  <text x="160" y="108" text-anchor="middle" font-family="Arial" font-size="20" fill="#1e3a8a">After School Class</text>
+</svg>
