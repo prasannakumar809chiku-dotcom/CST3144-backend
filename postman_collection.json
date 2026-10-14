@@ -1,0 +1,34 @@
+{
+  "info": {
+    "name": "CST3144 After School Classes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "lessonId", "value": "REPLACE_WITH_REAL_ID" }
+  ],
+  "item": [
+    { "name": "GET health", "request": { "method": "GET", "url": "{{baseUrl}}/health" } },
+    { "name": "GET all lessons", "request": { "method": "GET", "url": "{{baseUrl}}/lessons" } },
+    { "name": "GET search lessons", "request": { "method": "GET", "url": "{{baseUrl}}/lessons/search?q=math" } },
+    {
+      "name": "POST create order",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"John Smith\",\n  \"phone\": \"07123456789\",\n  \"lessonIDs\": [\"{{lessonId}}\"],\n  \"spaces\": 1\n}" },
+        "url": "{{baseUrl}}/orders"
+      }
+    },
+    {
+      "name": "PUT update lesson space",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"space\": 4\n}" },
+        "url": "{{baseUrl}}/lessons/{{lessonId}}"
+      }
+    },
+    { "name": "GET enrolment", "request": { "method": "GET", "url": "{{baseUrl}}/enrolment/{{lessonId}}" } }
+  ]
+}
