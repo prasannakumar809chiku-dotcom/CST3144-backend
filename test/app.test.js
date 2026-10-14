@@ -75,14 +75,23 @@ function buildFakeDb() {
         return {
           find(filter) {
             const filtered = applyFilter(lessons, filter);
+            let working = [...filtered];
             return {
               sort(sortObj) {
                 const [[key, order]] = Object.entries(sortObj);
-                filtered.sort((a, b) => (a[key] > b[key] ? order : -order));
+                working.sort((a, b) => (a[key] > b[key] ? order : -order));
+                return this;
+              },
+              skip(count) {
+                working = working.slice(count);
+                return this;
+              },
+              limit(count) {
+                working = working.slice(0, count);
                 return this;
               },
               async toArray() {
-                return filtered;
+                return working;
               }
             };
           },
@@ -156,6 +165,15 @@ test('GET /lessons supports search and teacher filter', async () => {
   assert.equal(response.status, 200);
   assert.equal(response.body.length, 1);
   assert.equal(response.body[0].subject, 'Physics Lab');
+});
+
+
+test('GET /lessons supports pagination', async () => {
+  const app = createApp({ db: buildFakeDb(), frontendUrl: '' });
+
+  const response = await request(app).get('/lessons?sortBy=subject&order=asc&page=2&limit=1');
+  assert.equal(response.status, 200);
+  assert.equal(response.body.length, 1);
 });
 
 test('POST /orders validates payload and returns 400 on invalid values', async () => {

@@ -8,7 +8,8 @@ function getLessonsFilter(query) {
   if (query.teacher) {
     filter.$or = [
       { 'teacher.name': { $regex: query.teacher, $options: 'i' } },
-      { teacherName: { $regex: query.teacher, $options: 'i' } }
+      { teacherName: { $regex: query.teacher, $options: 'i' } },
+      { 'teacher.speciality': { $regex: query.teacher, $options: 'i' } }
     ];
   }
 
@@ -35,7 +36,8 @@ function getLessonsFilter(query) {
       { image: regex },
       { icon: regex },
       { teacherName: regex },
-      { 'teacher.name': regex }
+      { 'teacher.name': regex },
+      { 'teacher.speciality': regex }
     ];
 
     const numericSearch = Number(searchTerm);
@@ -66,9 +68,14 @@ function createLessonsRouter(db) {
       const order = req.query.order === 'desc' ? -1 : 1;
       const filter = getLessonsFilter(req.query);
 
+      const page = Math.max(Number(req.query.page) || 1, 1);
+      const limit = Math.min(Math.max(Number(req.query.limit) || 100, 1), 200);
+
       const lessons = await lessonsCollection
         .find(filter)
         .sort({ [sortBy]: order })
+        .skip((page - 1) * limit)
+        .limit(limit)
         .toArray();
 
       return res.status(200).json(lessons);
