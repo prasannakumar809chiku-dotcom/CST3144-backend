@@ -57,6 +57,7 @@ Supported query params:
 - `sortBy`: `subject | location | price | spaces | teacherName`
 - `order`: `asc | desc`
 - `minPrice`, `maxPrice`
+- `page`, `limit` (pagination, limit max 200)
 
 Example:
 
@@ -81,7 +82,8 @@ Validation:
 
 - Name letters-only pattern
 - Phone numbers-only pattern
-- Quantity must be positive integer
+- Quantity must be positive integer (max 10 per item)
+- Max 20 items per order payload
 - Prevents booking when spaces are insufficient
 
 ### `PUT /lessons/:id`
@@ -116,3 +118,7 @@ Returns enrolment summary for a lesson:
 - Local sample assets:
   - `/images/sample-classroom.svg`
   - `/images/sample-science.svg`
+
+## Health checks
+
+For Render uptime checks, use `GET /health`.
