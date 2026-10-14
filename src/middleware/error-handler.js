@@ -3,8 +3,9 @@ function notFoundHandler(req, res) {
 }
 
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
-  const statusCode = err.statusCode || 500;
-  const message = err.message || 'Internal Server Error';
+  const isJsonSyntaxError = err instanceof SyntaxError && err.status === 400 && 'body' in err;
+  const statusCode = isJsonSyntaxError ? 400 : (err.statusCode || 500);
+  const message = isJsonSyntaxError ? 'Invalid JSON payload' : (err.message || 'Internal Server Error');
 
   if (process.env.NODE_ENV !== 'production') {
     return res.status(statusCode).json({ error: message, details: err.details || null });

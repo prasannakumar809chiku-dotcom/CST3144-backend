@@ -39,6 +39,15 @@ function createApp({ db, frontendUrl }) {
   app.use(morgan('dev'));
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
 
+
+  app.get('/', (req, res) => {
+    return res.status(200).json({
+      service: 'CST3144 Backend API',
+      status: 'running',
+      docs: '/health and /lessons endpoints available'
+    });
+  });
+
   app.get('/health', async (req, res) => {
     let dbStatus = 'up';
 

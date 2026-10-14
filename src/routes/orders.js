@@ -25,13 +25,12 @@ function createOrdersRouter(db) {
       });
 
       for (const item of normalizedItems) {
-        const updatedLesson = await lessonsCollection.findOneAndUpdate(
+        const reserveResult = await lessonsCollection.updateOne(
           { _id: item.lessonObjectId, spaces: { $gte: item.quantity } },
-          { $inc: { spaces: -item.quantity } },
-          { returnDocument: 'after' }
+          { $inc: { spaces: -item.quantity } }
         );
 
-        if (!updatedLesson) {
+        if (!reserveResult.matchedCount || !reserveResult.modifiedCount) {
           throw Object.assign(new Error(`Not enough spaces for lesson ${item.lessonId}`), { statusCode: 409 });
         }
 

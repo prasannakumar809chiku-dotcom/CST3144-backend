@@ -89,17 +89,17 @@ function createLessonsRouter(db) {
         return res.status(400).json({ error: 'Validation failed', details: validation.errors });
       }
 
-      const result = await lessonsCollection.findOneAndUpdate(
+      const updateResult = await lessonsCollection.updateOne(
         { _id: lessonId },
-        { $set: validation.data },
-        { returnDocument: 'after' }
+        { $set: validation.data }
       );
 
-      if (!result) {
+      if (!updateResult.matchedCount) {
         return res.status(404).json({ error: 'Lesson not found' });
       }
 
-      return res.status(200).json(result);
+      const lesson = await lessonsCollection.findOne({ _id: lessonId });
+      return res.status(200).json(lesson);
     } catch (error) {
       return next(error);
     }
