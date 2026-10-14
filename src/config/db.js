@@ -17,6 +17,21 @@ async function connectToDatabase({ uri, dbName }) {
   return db;
 }
 
+async function ensureDatabaseIndexes() {
+  if (!db) {
+    throw new Error('Database is not connected');
+  }
+
+  await db.collection('lessons').createIndexes([
+    { key: { subject: 1 } },
+    { key: { location: 1 } },
+    { key: { teacherName: 1 } },
+    { key: { price: 1 } }
+  ]);
+
+  await db.collection('orders').createIndex({ createdAt: -1 });
+}
+
 function getDb() {
   if (!db) {
     throw new Error('Database is not connected');
@@ -34,6 +49,7 @@ async function closeDatabaseConnection() {
 
 module.exports = {
   connectToDatabase,
+  ensureDatabaseIndexes,
   getDb,
   closeDatabaseConnection
 };

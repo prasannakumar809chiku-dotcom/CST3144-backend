@@ -1,11 +1,12 @@
 const http = require('http');
 
 const env = require('./config/env');
-const { connectToDatabase, closeDatabaseConnection } = require('./config/db');
+const { connectToDatabase, ensureDatabaseIndexes, closeDatabaseConnection } = require('./config/db');
 const { createApp } = require('./app');
 
 async function startServer() {
   const db = await connectToDatabase({ uri: env.mongodbUri, dbName: env.dbName });
+  await ensureDatabaseIndexes();
   const app = createApp({ db, frontendUrl: env.frontendUrl });
   const server = http.createServer(app);
 
