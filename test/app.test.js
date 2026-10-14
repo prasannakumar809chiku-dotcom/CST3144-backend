@@ -123,10 +123,16 @@ function buildFakeDb() {
             orders.push(doc);
             return { insertedId: new ObjectId('66aa000000000000000000ff') };
           },
-          aggregate() {
+          aggregate(pipeline) {
             return {
               async toArray() {
-                return [{ totalEnrolled: 0 }];
+                const lessonId = pipeline?.[1]?.$match?.['items.lessonId'];
+                const totalEnrolled = orders
+                  .flatMap((order) => order.items || [])
+                  .filter((item) => item.lessonId.toString() === lessonId.toString())
+                  .reduce((sum, item) => sum + item.quantity, 0);
+
+                return totalEnrolled ? [{ totalEnrolled }] : [];
               }
             };
           }
@@ -181,6 +187,39 @@ test('POST /orders validates payload and returns 400 on invalid values', async (
 
   const response = await request(app).post('/orders').send({ name: 'Bad123', phone: 'abc' });
   assert.equal(response.status, 400);
+});
+
+
+test('POST /orders creates order when stock is available', async () => {
+  const app = createApp({ db: buildFakeDb(), frontendUrl: '' });
+
+  const response = await request(app)
+    .post('/orders')
+    .send({
+      name: 'Alice Smith',
+      phone: '07123456789',
+      items: [{ lessonId: '66aa00000000000000000001', quantity: 1 }]
+    });
+
+  assert.equal(response.status, 201);
+  assert.equal(response.body.message, 'Order created');
+});
+
+test('GET /enrolment/:lessonid returns enrolment summary', async () => {
+  const db = buildFakeDb();
+  const app = createApp({ db, frontendUrl: '' });
+
+  await request(app)
+    .post('/orders')
+    .send({
+      name: 'Alice Smith',
+      phone: '07123456789',
+      items: [{ lessonId: '66aa00000000000000000001', quantity: 1 }]
+    });
+
+  const response = await request(app).get('/enrolment/66aa00000000000000000001');
+  assert.equal(response.status, 200);
+  assert.equal(response.body.totalEnrolled, 1);
 });
 
 test('PUT /lessons/:id rejects invalid ObjectId', async () => {
