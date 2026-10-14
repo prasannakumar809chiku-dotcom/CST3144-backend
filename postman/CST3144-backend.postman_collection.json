@@ -1,0 +1,80 @@
+{
+  "info": {
+    "name": "CST3144 Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Get lessons",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/lessons?sortBy=subject&order=asc"
+      }
+    },
+    {
+      "name": "Search lessons",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/lessons?q=science&teacher=sarah"
+      }
+    },
+    {
+      "name": "Create order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Smith\",\n  \"phone\": \"07123456789\",\n  \"items\": [\n    { \"lessonId\": \"{{lessonId}}\", \"quantity\": 1 }\n  ]\n}"
+        },
+        "url": "{{baseUrl}}/orders"
+      }
+    },
+    {
+      "name": "Update lesson",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"spaces\": 8\n}"
+        },
+        "url": "{{baseUrl}}/lessons/{{lessonId}}"
+      }
+    },
+    {
+      "name": "Get enrolment",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/enrolment/{{lessonId}}"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cst3144-m01030169-backend.onrender.com"
+    },
+    {
+      "key": "lessonId",
+      "value": "replace_with_lesson_object_id"
+    }
+  ]
+}

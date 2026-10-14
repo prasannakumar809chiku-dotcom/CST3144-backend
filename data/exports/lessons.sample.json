@@ -1,0 +1,17 @@
+[
+  {
+    "_id": { "$oid": "66aa00000000000000000001" },
+    "subject": "Mathematics Club",
+    "location": "Room A1",
+    "price": 25,
+    "spaces": 12,
+    "image": "/images/sample-classroom.svg",
+    "icon": "➗",
+    "description": "Problem-solving and exam-skills session for key stage learners.",
+    "teacherName": "Ms. Priya Shah",
+    "teacher": {
+      "name": "Ms. Priya Shah",
+      "speciality": "Mathematics"
+    }
+  }
+]

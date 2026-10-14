@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cst3144-m01030169-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
