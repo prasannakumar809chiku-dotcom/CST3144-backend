@@ -1,0 +1,142 @@
+[
+  {
+    "subject": "Mathematics Club",
+    "location": "Room A1",
+    "price": 25,
+    "spaces": 12,
+    "image": "/images/sample-classroom.svg",
+    "icon": "➗",
+    "description": "Problem-solving and exam-skills session for key stage learners.",
+    "teacherName": "Ms. Priya Shah",
+    "teacher": {
+      "name": "Ms. Priya Shah",
+      "speciality": "Mathematics"
+    }
+  },
+  {
+    "subject": "English Literature",
+    "location": "Room B2",
+    "price": 20,
+    "spaces": 15,
+    "image": "/images/sample-classroom.svg",
+    "icon": "📚",
+    "description": "Reading, analysis and creative writing activities.",
+    "teacherName": "Mr. Alex Brown",
+    "teacher": {
+      "name": "Mr. Alex Brown",
+      "speciality": "English"
+    }
+  },
+  {
+    "subject": "Physics Lab",
+    "location": "Science Lab 1",
+    "price": 30,
+    "spaces": 10,
+    "image": "/images/sample-science.svg",
+    "icon": "🧪",
+    "description": "Hands-on experiments and practical physics demonstrations.",
+    "teacherName": "Dr. Sarah Khan",
+    "teacher": {
+      "name": "Dr. Sarah Khan",
+      "speciality": "Physics"
+    }
+  },
+  {
+    "subject": "Chemistry Explorers",
+    "location": "Science Lab 2",
+    "price": 28,
+    "spaces": 10,
+    "image": "/images/sample-science.svg",
+    "icon": "⚗️",
+    "description": "Safe practical chemistry activities and mini-projects.",
+    "teacherName": "Dr. Sarah Khan",
+    "teacher": {
+      "name": "Dr. Sarah Khan",
+      "speciality": "Chemistry"
+    }
+  },
+  {
+    "subject": "Computer Coding",
+    "location": "ICT Suite",
+    "price": 35,
+    "spaces": 14,
+    "image": "/images/sample-classroom.svg",
+    "icon": "💻",
+    "description": "Beginner-friendly programming with JavaScript projects.",
+    "teacherName": "Mr. Daniel Lee",
+    "teacher": {
+      "name": "Mr. Daniel Lee",
+      "speciality": "Computer Science"
+    }
+  },
+  {
+    "subject": "History Detectives",
+    "location": "Room C3",
+    "price": 18,
+    "spaces": 16,
+    "image": "/images/sample-classroom.svg",
+    "icon": "🏛️",
+    "description": "Explore key historical events through group investigations.",
+    "teacherName": "Ms. Laura Green",
+    "teacher": {
+      "name": "Ms. Laura Green",
+      "speciality": "History"
+    }
+  },
+  {
+    "subject": "Geography Field Skills",
+    "location": "Room D4",
+    "price": 22,
+    "spaces": 13,
+    "image": "/images/sample-classroom.svg",
+    "icon": "🗺️",
+    "description": "Map reading, sustainability topics and fieldwork planning.",
+    "teacherName": "Mr. Ahmed Ali",
+    "teacher": {
+      "name": "Mr. Ahmed Ali",
+      "speciality": "Geography"
+    }
+  },
+  {
+    "subject": "Art & Design Studio",
+    "location": "Art Room",
+    "price": 24,
+    "spaces": 12,
+    "image": "/images/sample-classroom.svg",
+    "icon": "🎨",
+    "description": "Drawing, painting and design portfolio practice.",
+    "teacherName": "Ms. Emma White",
+    "teacher": {
+      "name": "Ms. Emma White",
+      "speciality": "Art"
+    }
+  },
+  {
+    "subject": "Music Ensemble",
+    "location": "Music Hall",
+    "price": 26,
+    "spaces": 11,
+    "image": "/images/sample-classroom.svg",
+    "icon": "🎵",
+    "description": "Collaborative music sessions using school instruments.",
+    "teacherName": "Mr. Tom Walker",
+    "teacher": {
+      "name": "Mr. Tom Walker",
+      "speciality": "Music"
+    }
+  },
+  {
+    "subject": "Biology Investigations",
+    "location": "Science Lab 3",
+    "price": 29,
+    "spaces": 9,
+    "image": "/images/sample-science.svg",
+    "icon": "🧬",
+    "description": "Microscope work and biology practical investigations.",
+    "teacherName": "Dr. Nisha Patel",
+    "teacher": {
+      "name": "Dr. Nisha Patel",
+      "speciality": "Biology"
+    }
+  }
+]

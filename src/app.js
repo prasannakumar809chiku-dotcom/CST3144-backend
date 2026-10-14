@@ -3,14 +3,16 @@ const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan');
 
+const { createLessonsRouter } = require('./routes/lessons');
+const { createOrdersRouter } = require('./routes/orders');
+const { createEnrolmentRouter } = require('./routes/enrolment');
 const { notFoundHandler, errorHandler } = require('./middleware/error-handler');
 
 function buildCorsOptions(frontendUrl) {
   const allowedOrigins = [
     frontendUrl,
     'http://localhost:5173',
-    'http://127.0.0.1:5173',
-    'https://*.github.io'
+    'http://127.0.0.1:5173'
   ].filter(Boolean);
 
   return {
@@ -24,7 +26,7 @@ function buildCorsOptions(frontendUrl) {
         return callback(null, true);
       }
 
-      return callback(new Error('CORS origin not allowed'));
+      return callback(null, false);
     }
   };
 }
@@ -48,6 +50,10 @@ function createApp({ db, frontendUrl }) {
 
     return res.status(200).json({ status: 'ok', database: dbStatus });
   });
+
+  app.use('/lessons', createLessonsRouter(db));
+  app.use('/orders', createOrdersRouter(db));
+  app.use('/enrolment', createEnrolmentRouter(db));
 
   app.use(notFoundHandler);
   app.use(errorHandler);
